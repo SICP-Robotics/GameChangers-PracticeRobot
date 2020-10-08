@@ -1,26 +1,8 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
-import java.text.DecimalFormat;
-import java.util.Arrays;
-
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.ColorWheel;
-import frc.robot.commands.Calibrate;
-import frc.robot.subsystems.ColorWheelSpinner;
-import frc.robot.subsystems.HangerArm;
-import frc.robot.subsystems.RangeFinder;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,15 +21,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer. This will perform all our button bindings,
-    // and put our
-    // autonomous chooser on the dashboard.
+    // Instantiate our RobotContainer. This will perform all our button and
+    // command bindings.
     robotContainer = new RobotContainer();
-    // UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(0);
-    // UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
-    // cam2.setResolution(320, 320);
-    // cam1.setResolution(320, 320);
-
   }
 
   /**

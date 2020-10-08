@@ -1,32 +1,26 @@
 package frc.robot.subsystems;
 
-import java.util.Arrays;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.SubsystemBaseWrapper;
 
 /**
  * the DriveTrain, aka the thing that moves the robot
  */
-public final class DriveTrain extends SubsystemBaseWrapper {
+public final class DriveTrain extends SubsystemBase {
     private final DifferentialDrive robotDrive;
     
     private final WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.DriveTrain.FRONT_RIGHT_MOTOR_ID);
     private final WPI_TalonSRX rearRight = new WPI_TalonSRX(Constants.DriveTrain.REAR_RIGHT_MOTOR_ID);
     private final WPI_TalonSRX frontLeft = new WPI_TalonSRX(Constants.DriveTrain.FRONT_LEFT_MOTOR_ID);
     private final WPI_TalonSRX rearLeft = new WPI_TalonSRX(Constants.DriveTrain.REAR_LEFT_MOTOR_ID);
-
-    private final Gyro gyro;
 
     private final DoubleSupplier getLeftPosition;
     private final DoubleSupplier getLeftVelocity;
@@ -55,10 +49,6 @@ public final class DriveTrain extends SubsystemBaseWrapper {
         getLeftVelocity = frontLeft::getSelectedSensorVelocity;
 
         this.robotDrive = new DifferentialDrive(left, right);
-
-        // Gyro
-        gyro = new ADXRS450_Gyro();
-        gyro.calibrate();
     }
 
     //Mostly taken from last year's robot
@@ -94,16 +84,6 @@ public final class DriveTrain extends SubsystemBaseWrapper {
         SmartDashboard.putNumber("Front Left Motor Position", frontLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("Front Right Motor Velocity", frontRight.getSelectedSensorVelocity());
         SmartDashboard.putNumber("Front Left Motor Velocity", frontLeft.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Gyro Value", gyro.getAngle());
-        
-    }
-
-    public double getRotation() {
-        return gyro.getAngle();
-    }
-
-    public void calibrateGyro() {
-        gyro.calibrate();
     }
 
     public double getLeftPosition() {
