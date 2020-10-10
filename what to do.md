@@ -1,42 +1,25 @@
 ## Task 0. Setup
 
-### Subtask 0. Viewing This Document
-Open VSCode (our IDE) and then press `CTRL + Shift + V`, which will open up a fancy view of tihs document. Also, if you need any help, don't forget that you can ask another coder (like Sam)!
-
-### Subtask 1. Cloning Code
-First, let's set up your coding environment, where you'll be doing to bulk of your coding. First, we need to **clone** our code from our git code repository, which holds our code and tracks changes. Our git repository is located on a remote server hosted by **GitHub**, and when we **clone** code we're basically just copying it off of there.
-
-1. Open up GitHub Desktop. The icon looks like a white cat on a purple background.
-2. Go to `File > Clone repository...`.
-3. Click on the `GitHub.com` tab if not already selected.
-4. Search for `PracticeRobot` in the search bar and select it. The full repo name should be something like `@SICP-Robotics/GameChangers-PracticeRobot`.
-5. Check the location that it's cloning to and remember that location.
-6. Click `Clone`.
-
-### Subtask 2. Open the Code
-1. Using VSCode, which is probably what you're viewing this document on, go to `File > Open Folder` and find the location where you cloned `PracticeRobot` to.
-2. If you now see the code, you're good to go.
-
-### Subtask 3. Build the Code
+### Subtask 1. Build the Code
 Our robot is written in Java using libraries provided by FIRST. The main library used is called *WPILib*. Since it's written in Java, we need to turn it from our human-readable Java code to machine-readable bytecode. We do that through a process called **building**. We automate our **build process** through a tool called Gradle. For the most part, you won't have to mess with Gradle directly.
 
 1. Open up a terminal. You can do this by going to `Terminal > New Terminal`.
 2. Type `./gradlew build` and then press enter. This will run the Gradle task `build`.
 3. You should see the green letters `BUILD SUCCESSFUL` in ther terminal after some time. Not that the first build might be really slow compared to the others.
 
-### Subtask 4. Shortcuts
+### Subtask 2. Shortcuts
 What you've just done is run the Gradle task `build`. Instead of typing that every time we want to build, though, we have a shortcut -- go the W icon in the top-right corner, click it and find `Build Robot Code`. Click it and it will build the code for you.
 
-### Subtask 5. Deploying the Code
-To actually put our code on the robot, we will use a process called **deploying**. Deploying consists of first building our code and then uploading it onto the robot. Again, Gradle will be managing this process for us.
+### Subtask 3. Deploying the Code
+To actually put our code on the robot, we will use a process called **deploying**. Deploying consists of first building our code and then uploading it onto the robot. Again, Gradle will be managing this process for us. In case there is not an available robot for you to use, just skip this step.
 
 1. Turn on the robot. You do this by squeezing the on/off switch. You'll probably need someone to show you how to turn it on.
 2. Take note of the year on the radio. This is the white thing with the blinky lights. Again, you might want someone to show this to you. The year will be something like `2018A`, depending on what year the radio is from.
 3. Open up the WiFi menu on the laptop and connect to the WiFi. We will be deploying our code over WiFi.
 4. Go to the W icon and select `Deploy Robot Code`. Gradle will then build the code for you and put it on the robot.
 
-### Subtask 6. Run the Code on the Robot
-Now that our code is on the robot, we probably want to run it and test it out. 
+### Subtask 4. Run the Code on the Robot
+Now that our code is on the robot, we probably want to run it and test it out. If your code isn't on the robot, skip this step.
 
 1. Open up a program called `FRC Driver Station`. This is the program that we'll be using to interface with the robot, and it's the same thing that we use during competitions.
 2. Plug in a joystick to the computer.
@@ -101,12 +84,12 @@ Notice that on the left, we have a file tree of everything in our folder. We'll 
     }
     ```
 6. Deploy the code onto the robot.
-7. Open up the driver station. You should see a console on the right. Right click it and hit `View console log`. This is basically your robot's debug output.
+7. Open up the driver station. You should see a console on the right. Click the gear icon on the top left and click `View Console`. This is basically your robot's debug output.
 8. You should see your message `Hello, world!` in green somewhere in the console. Congrats!
 9. Try experimenting with this. How do you think that you could make it say something like "Hello, world! My name is *(your name)*"?
 
 ### Subtask 2. Writing a Command
-This is where things get more complicated, so if you don't know Java I suggest that you give yourself a pat on the back for getting this far and maybe look up some tutorials on the internet. If you know Java or are brave, you may continue.
+This is where things get more complicated, so if you don't know Java I suggest that you give yourself a pat on the back for getting this far. If we have time and you're brave, you can continue.
 
 Our robot is controlled by `subsystems`, which in turn are controlled by `commands`, which are all set up in the `RobotContainer`. The subsystems directly manage the robot's hardware and are where the low-level code lies. The advantage of using a system like this is that there won't be conflicts between two different things trying to use the same physical robot parts at the same time -- imagine the following scenario:
 
@@ -141,11 +124,11 @@ Now, here's our actual task that you'll be doing: you'll be making a command tha
     ```
 2. Add the following line:
     ```java
-    buttonA.whenPressed(new RunCommand(() -> driveTrain.cheesyDrive(0.3, 0, -1)).withTimeout(1), driveTrain);
+    buttonA.whenPressed(new RunCommand(() -> driveTrain.cheesyDrive(0.5, 0, -1), driveTrain).withTimeout(1));
     ```
     This binds a `RunCommand` to the buttonA that uses the `cheesyDrive` method on the `driveTrain` to drive the robot forwards. The parameters of `cheesyDrive` are:
     1. speed
-    2. rotation
+    2. rotation (`0` is straight)
     3. `-1` (this value should always be -1)
 3. Deploy.
 4. Plug in the operator controller and press A to see if it works! Make sure to have your finger over the `Disable` button (or the enter key) in case something goes wrong.
